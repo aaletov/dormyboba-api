@@ -1,57 +1,51 @@
 PYTHON_VERSION := 3.12.0
-# PYTHON_ARCHIVE := v${PYTHON_VERSION}.tar.gz
-# PYTHON_LINK := https://github.com/python/cpython/archive/refs/tags/${PYTHON_ARCHIVE}
-# PYTHON_SOURCE := cpython-${PYTHON_VERSION}
+GO_VERSION := 1.21.3
+PROTOC_VERSION := 24.4
+PROTOC_GEN_GO_VERSION := 1.31.0
+PROTOC_GEN_GO_GRPC_VERSION := 1.3.0
 
-# ${PYTHON_SOURCE}:
-# wget -qO- ${PYTHON_LINK} | tar xz
+get_version = $(shell echo $(1) | grep -Eo '([0-9]+\.)+[0-9]+')
+get_python_version = $(call get_version,$(shell python3 --version))
+get_go_version = $(call get_version,$(shell go version))
+get_protoc_version = $(call get_version,$(shell protoc --version))
+get_protoc_gen_go_version = $(call get_version,$(shell protoc-gen-go --version))
+get_protoc_gen_go_grpc_version = $(call get_version,$(shell protoc-gen-go-grpc --version))
 
-define NEWLINE
+install-protoc-gen-go:
+	go install google.golang.org/protobuf/cmd/protoc-gen-go@v${PROTOC_GEN_GO_VERSION}
+
+install-protoc-gen-go-grpc:
+	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v${PROTOC_GEN_GO_GRPC_VERSION}
 
 
-endef
-export NEWLINE
-
-define PYENV_MAGIC
-
-Add this to your .bashrc
-
-export PYENV_ROOT="$$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$$PYENV_ROOT/bin:$$PATH"
-eval "$$(pyenv init -)"
-endef
-export PYENV_MAGIC
-
-.PHONY: install-python
-install-python:
-ifeq ($(shell which python3),)
-	ifeq ($(shell which pyenv),)
-		apt update && \
-			apt install -y libffi-dev pkg-config
-		curl https://pyenv.run | bash
-	endif
-	pyenv install ${PYTHON_VERSION}
-	@echo $(subst "$$NEWLINE",\n,"$$PYENV_MAGIC")
-	pyenv global 3.12.0
+gen-go:
+ifneq ($(call get_python_version),${PYTHON_VERSION})
+	$(error ti eblan)
 endif
-
-.PHONY: install-poetry
-install-poetry: install-python
-ifeq ($(shell which poetry),)
-	curl -sSL https://install.python-poetry.org | python3 -
-	${HOME}/.local/bin/poetry config virtualenvs.in-project true
+ifneq ($(call get_go_version),${GO_VERSION})
+	$(error ti vashe eblan)
 endif
-
-.PHONY: install-go
-install-go:
-ifeq ($(shell which go),)
-	wget -qO- https://go.dev/dl/go1.21.3.linux-amd64.tar.gz | \
-		tar xz -C ${HOME}/.local
+ifneq ($(call get_protoc_version),${PROTOC_VERSION})
+	$(error ti vashe vashe eblan)
 endif
+ifneq ($(call get_protoc_gen_go_version),${PROTOC_GEN_GO_VERSION})
+	$(error ti vashe vashe vashe eblan)
+endif
+ifneq ($(call get_protoc_gen_go_grpc_version),${PROTOC_GEN_GO_GRPC_VERSION})
+	$(error ti vashe vashe vashe vashe eblan)
+endif
+	protoc ./api/v1api.proto \
+		--go-grpc_opt=paths=source_relative \
+		--go-grpc_out=./api/generated/go
 
-.PHONY: install-protoc
-install-protoc:
+.PHONY: gen-python
+gen-python:
+	cd ./api/generated/python && poetry run python3 -m grpc_tools.protoc \
+		-I../.. \
+		--python_out=. \
+		--pyi_out=. \
+		--grpc_python_out=. \
+		../../v1api.proto
 
-
-.PHONY: install-deps
-install-deps: install-python install-poetry install-go install-protoc
+.PHONY: gen-all
+gen-all: gen-go gen-python

@@ -4,6 +4,8 @@ package api;
 
 option go_package = "github.com/aaletov/dormyboba-api/api/generated/go/api";
 
+import "google/protobuf/empty.proto";
+
 enum Role {
     ADMIN_ROLE = 0;
     CLIENT_ROLE = 1;
@@ -26,6 +28,21 @@ message GetRoleResponse {
     Role role = 1;
 }
 
+message GenerateInviteRequest {
+    Role role = 1;
+}
+
+message GenerateInviteResponse {
+    bytes Secret = 1;
+}
+
+message BindUserRequest {
+    bytes Secret = 1;
+    ClientId id = 2;
+}
+
 service AuthService {
+    rpc GenerateInvite(GenerateInviteRequest) returns (GenerateInviteResponse) {}
+    rpc BindUser(BindUserRequest) returns (google.protobuf.Empty) {}
     rpc GetRole (GetRoleRequest) returns (GetRoleResponse) {}
 }

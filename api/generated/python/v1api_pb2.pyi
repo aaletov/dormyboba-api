@@ -1,3 +1,4 @@
+from google.protobuf import empty_pb2 as _empty_pb2
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
@@ -36,3 +37,23 @@ class GetRoleResponse(_message.Message):
     ROLE_FIELD_NUMBER: _ClassVar[int]
     role: Role
     def __init__(self, role: _Optional[_Union[Role, str]] = ...) -> None: ...
+
+class GenerateInviteRequest(_message.Message):
+    __slots__ = ["role"]
+    ROLE_FIELD_NUMBER: _ClassVar[int]
+    role: Role
+    def __init__(self, role: _Optional[_Union[Role, str]] = ...) -> None: ...
+
+class GenerateInviteResponse(_message.Message):
+    __slots__ = ["Secret"]
+    SECRET_FIELD_NUMBER: _ClassVar[int]
+    Secret: bytes
+    def __init__(self, Secret: _Optional[bytes] = ...) -> None: ...
+
+class BindUserRequest(_message.Message):
+    __slots__ = ["Secret", "id"]
+    SECRET_FIELD_NUMBER: _ClassVar[int]
+    ID_FIELD_NUMBER: _ClassVar[int]
+    Secret: bytes
+    id: ClientId
+    def __init__(self, Secret: _Optional[bytes] = ..., id: _Optional[_Union[ClientId, _Mapping]] = ...) -> None: ...

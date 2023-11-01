@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -19,13 +20,17 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	AuthService_GetRole_FullMethodName = "/api.AuthService/GetRole"
+	AuthService_GenerateInvite_FullMethodName = "/api.AuthService/GenerateInvite"
+	AuthService_BindUser_FullMethodName       = "/api.AuthService/BindUser"
+	AuthService_GetRole_FullMethodName        = "/api.AuthService/GetRole"
 )
 
 // AuthServiceClient is the client API for AuthService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AuthServiceClient interface {
+	GenerateInvite(ctx context.Context, in *GenerateInviteRequest, opts ...grpc.CallOption) (*GenerateInviteResponse, error)
+	BindUser(ctx context.Context, in *BindUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetRole(ctx context.Context, in *GetRoleRequest, opts ...grpc.CallOption) (*GetRoleResponse, error)
 }
 
@@ -35,6 +40,24 @@ type authServiceClient struct {
 
 func NewAuthServiceClient(cc grpc.ClientConnInterface) AuthServiceClient {
 	return &authServiceClient{cc}
+}
+
+func (c *authServiceClient) GenerateInvite(ctx context.Context, in *GenerateInviteRequest, opts ...grpc.CallOption) (*GenerateInviteResponse, error) {
+	out := new(GenerateInviteResponse)
+	err := c.cc.Invoke(ctx, AuthService_GenerateInvite_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) BindUser(ctx context.Context, in *BindUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, AuthService_BindUser_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *authServiceClient) GetRole(ctx context.Context, in *GetRoleRequest, opts ...grpc.CallOption) (*GetRoleResponse, error) {
@@ -50,6 +73,8 @@ func (c *authServiceClient) GetRole(ctx context.Context, in *GetRoleRequest, opt
 // All implementations must embed UnimplementedAuthServiceServer
 // for forward compatibility
 type AuthServiceServer interface {
+	GenerateInvite(context.Context, *GenerateInviteRequest) (*GenerateInviteResponse, error)
+	BindUser(context.Context, *BindUserRequest) (*emptypb.Empty, error)
 	GetRole(context.Context, *GetRoleRequest) (*GetRoleResponse, error)
 	mustEmbedUnimplementedAuthServiceServer()
 }
@@ -58,6 +83,12 @@ type AuthServiceServer interface {
 type UnimplementedAuthServiceServer struct {
 }
 
+func (UnimplementedAuthServiceServer) GenerateInvite(context.Context, *GenerateInviteRequest) (*GenerateInviteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GenerateInvite not implemented")
+}
+func (UnimplementedAuthServiceServer) BindUser(context.Context, *BindUserRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BindUser not implemented")
+}
 func (UnimplementedAuthServiceServer) GetRole(context.Context, *GetRoleRequest) (*GetRoleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRole not implemented")
 }
@@ -72,6 +103,42 @@ type UnsafeAuthServiceServer interface {
 
 func RegisterAuthServiceServer(s grpc.ServiceRegistrar, srv AuthServiceServer) {
 	s.RegisterService(&AuthService_ServiceDesc, srv)
+}
+
+func _AuthService_GenerateInvite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GenerateInviteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).GenerateInvite(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_GenerateInvite_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).GenerateInvite(ctx, req.(*GenerateInviteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_BindUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BindUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).BindUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_BindUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).BindUser(ctx, req.(*BindUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _AuthService_GetRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -99,6 +166,14 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "api.AuthService",
 	HandlerType: (*AuthServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GenerateInvite",
+			Handler:    _AuthService_GenerateInvite_Handler,
+		},
+		{
+			MethodName: "BindUser",
+			Handler:    _AuthService_BindUser_Handler,
+		},
 		{
 			MethodName: "GetRole",
 			Handler:    _AuthService_GetRole_Handler,

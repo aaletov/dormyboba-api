@@ -11,9 +11,10 @@ from google.protobuf.internal import builder as _builder
 _sym_db = _symbol_database.Default()
 
 
+from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bv1api.proto\x12\x03\x61pi\"7\n\x08\x43lientId\x12\x1f\n\x08platform\x18\x01 \x01(\x0e\x32\r.api.Platform\x12\n\n\x02id\x18\x02 \x01(\t\"+\n\x0eGetRoleRequest\x12\x19\n\x02id\x18\x01 \x01(\x0b\x32\r.api.ClientId\"*\n\x0fGetRoleResponse\x12\x17\n\x04role\x18\x01 \x01(\x0e\x32\t.api.Role*\'\n\x04Role\x12\x0e\n\nADMIN_ROLE\x10\x00\x12\x0f\n\x0b\x43LIENT_ROLE\x10\x01*\x12\n\x08Platform\x12\x06\n\x02VK\x10\x00\x32\x45\n\x0b\x41uthService\x12\x36\n\x07GetRole\x12\x13.api.GetRoleRequest\x1a\x14.api.GetRoleResponse\"\x00\x42\x37Z5github.com/aaletov/dormyboba-api/api/generated/go/apib\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bv1api.proto\x12\x03\x61pi\x1a\x1bgoogle/protobuf/empty.proto\"7\n\x08\x43lientId\x12\x1f\n\x08platform\x18\x01 \x01(\x0e\x32\r.api.Platform\x12\n\n\x02id\x18\x02 \x01(\t\"+\n\x0eGetRoleRequest\x12\x19\n\x02id\x18\x01 \x01(\x0b\x32\r.api.ClientId\"*\n\x0fGetRoleResponse\x12\x17\n\x04role\x18\x01 \x01(\x0e\x32\t.api.Role\"0\n\x15GenerateInviteRequest\x12\x17\n\x04role\x18\x01 \x01(\x0e\x32\t.api.Role\"(\n\x16GenerateInviteResponse\x12\x0e\n\x06Secret\x18\x01 \x01(\x0c\"<\n\x0f\x42indUserRequest\x12\x0e\n\x06Secret\x18\x01 \x01(\x0c\x12\x19\n\x02id\x18\x02 \x01(\x0b\x32\r.api.ClientId*\'\n\x04Role\x12\x0e\n\nADMIN_ROLE\x10\x00\x12\x0f\n\x0b\x43LIENT_ROLE\x10\x01*\x12\n\x08Platform\x12\x06\n\x02VK\x10\x00\x32\xce\x01\n\x0b\x41uthService\x12K\n\x0eGenerateInvite\x12\x1a.api.GenerateInviteRequest\x1a\x1b.api.GenerateInviteResponse\"\x00\x12:\n\x08\x42indUser\x12\x14.api.BindUserRequest\x1a\x16.google.protobuf.Empty\"\x00\x12\x36\n\x07GetRole\x12\x13.api.GetRoleRequest\x1a\x14.api.GetRoleResponse\"\x00\x42\x37Z5github.com/aaletov/dormyboba-api/api/generated/go/apib\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -21,16 +22,22 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'v1api_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'Z5github.com/aaletov/dormyboba-api/api/generated/go/api'
-  _globals['_ROLE']._serialized_start=166
-  _globals['_ROLE']._serialized_end=205
-  _globals['_PLATFORM']._serialized_start=207
-  _globals['_PLATFORM']._serialized_end=225
-  _globals['_CLIENTID']._serialized_start=20
-  _globals['_CLIENTID']._serialized_end=75
-  _globals['_GETROLEREQUEST']._serialized_start=77
-  _globals['_GETROLEREQUEST']._serialized_end=120
-  _globals['_GETROLERESPONSE']._serialized_start=122
-  _globals['_GETROLERESPONSE']._serialized_end=164
-  _globals['_AUTHSERVICE']._serialized_start=227
-  _globals['_AUTHSERVICE']._serialized_end=296
+  _globals['_ROLE']._serialized_start=349
+  _globals['_ROLE']._serialized_end=388
+  _globals['_PLATFORM']._serialized_start=390
+  _globals['_PLATFORM']._serialized_end=408
+  _globals['_CLIENTID']._serialized_start=49
+  _globals['_CLIENTID']._serialized_end=104
+  _globals['_GETROLEREQUEST']._serialized_start=106
+  _globals['_GETROLEREQUEST']._serialized_end=149
+  _globals['_GETROLERESPONSE']._serialized_start=151
+  _globals['_GETROLERESPONSE']._serialized_end=193
+  _globals['_GENERATEINVITEREQUEST']._serialized_start=195
+  _globals['_GENERATEINVITEREQUEST']._serialized_end=243
+  _globals['_GENERATEINVITERESPONSE']._serialized_start=245
+  _globals['_GENERATEINVITERESPONSE']._serialized_end=285
+  _globals['_BINDUSERREQUEST']._serialized_start=287
+  _globals['_BINDUSERREQUEST']._serialized_end=347
+  _globals['_AUTHSERVICE']._serialized_start=411
+  _globals['_AUTHSERVICE']._serialized_end=617
 # @@protoc_insertion_point(module_scope)

@@ -2,6 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
+from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 import v1api_pb2 as v1api__pb2
 
 
@@ -14,6 +15,16 @@ class AuthServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
+        self.GenerateInvite = channel.unary_unary(
+                '/api.AuthService/GenerateInvite',
+                request_serializer=v1api__pb2.GenerateInviteRequest.SerializeToString,
+                response_deserializer=v1api__pb2.GenerateInviteResponse.FromString,
+                )
+        self.BindUser = channel.unary_unary(
+                '/api.AuthService/BindUser',
+                request_serializer=v1api__pb2.BindUserRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
         self.GetRole = channel.unary_unary(
                 '/api.AuthService/GetRole',
                 request_serializer=v1api__pb2.GetRoleRequest.SerializeToString,
@@ -24,6 +35,18 @@ class AuthServiceStub(object):
 class AuthServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
+    def GenerateInvite(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BindUser(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def GetRole(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -33,6 +56,16 @@ class AuthServiceServicer(object):
 
 def add_AuthServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
+            'GenerateInvite': grpc.unary_unary_rpc_method_handler(
+                    servicer.GenerateInvite,
+                    request_deserializer=v1api__pb2.GenerateInviteRequest.FromString,
+                    response_serializer=v1api__pb2.GenerateInviteResponse.SerializeToString,
+            ),
+            'BindUser': grpc.unary_unary_rpc_method_handler(
+                    servicer.BindUser,
+                    request_deserializer=v1api__pb2.BindUserRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
             'GetRole': grpc.unary_unary_rpc_method_handler(
                     servicer.GetRole,
                     request_deserializer=v1api__pb2.GetRoleRequest.FromString,
@@ -47,6 +80,40 @@ def add_AuthServiceServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class AuthService(object):
     """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def GenerateInvite(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/api.AuthService/GenerateInvite',
+            v1api__pb2.GenerateInviteRequest.SerializeToString,
+            v1api__pb2.GenerateInviteResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BindUser(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/api.AuthService/BindUser',
+            v1api__pb2.BindUserRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetRole(request,

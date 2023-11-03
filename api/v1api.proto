@@ -33,11 +33,11 @@ message GenerateInviteRequest {
 }
 
 message GenerateInviteResponse {
-    bytes Secret = 1;
+    string Secret = 1;
 }
 
 message BindUserRequest {
-    bytes Secret = 1;
+    string Secret = 1;
     ClientId id = 2;
 }
 

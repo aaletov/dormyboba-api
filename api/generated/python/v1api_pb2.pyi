@@ -47,13 +47,13 @@ class GenerateInviteRequest(_message.Message):
 class GenerateInviteResponse(_message.Message):
     __slots__ = ["Secret"]
     SECRET_FIELD_NUMBER: _ClassVar[int]
-    Secret: bytes
-    def __init__(self, Secret: _Optional[bytes] = ...) -> None: ...
+    Secret: str
+    def __init__(self, Secret: _Optional[str] = ...) -> None: ...
 
 class BindUserRequest(_message.Message):
     __slots__ = ["Secret", "id"]
     SECRET_FIELD_NUMBER: _ClassVar[int]
     ID_FIELD_NUMBER: _ClassVar[int]
-    Secret: bytes
+    Secret: str
     id: ClientId
-    def __init__(self, Secret: _Optional[bytes] = ..., id: _Optional[_Union[ClientId, _Mapping]] = ...) -> None: ...
+    def __init__(self, Secret: _Optional[str] = ..., id: _Optional[_Union[ClientId, _Mapping]] = ...) -> None: ...

@@ -10,9 +10,9 @@ gen-python:
 		poetry install && \
 		poetry run python3 -m grpc_tools.protoc \
 		-I../.. \
-		--python_out=. \
-		--pyi_out=. \
-		--grpc_python_out=. \
+		--python_out=dormyboba_api \
+		--pyi_out=dormyboba_api \
+		--grpc_python_out=dormyboba_api \
 		../../v1api.proto
 
 .PHONY: gen-all

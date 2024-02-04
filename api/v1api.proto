@@ -1,0 +1,135 @@
+syntax = "proto3";
+
+package api;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+service DormybobaCore {
+    rpc GenerateVerificationCode(GenerateVerificationCodeRequest) returns (GenerateVerificationCodeResponse) {}
+    rpc GetRoleByVerificationCode(GetRoleByVerificationCodeRequest) returns (GetRoleByVerificationCodeResponse) {}
+    rpc CreateUser(CreateUserRequest) returns (google.protobuf.Empty) {}
+    rpc GetAllInstitutes(google.protobuf.Empty) returns (GetAllInstitutesResponse) {}
+    rpc GetInstituteByName(GetInstituteByNameRequest) returns (GetInstituteByNameResponse) {}
+    rpc GetAllAcademicTypes(google.protobuf.Empty) returns (GetAllAcademicTypesResponse) {}
+    rpc GetAcademicTypeByName(GetAcademicTypeByNameRequest) returns (GetAcademicTypeByNameResponse) {}
+    rpc CreateMailing(CreateMailingRequest) returns (google.protobuf.Empty) {}
+    rpc CreateQueue(CreateQueueRequest) returns (google.protobuf.Empty) {}
+    rpc AddPersonToQueue(AddPersonToQueueRequest) returns (AddPersonToQueueResponse) {}
+    rpc RemovePersonFromQueue(RemovePersonFromQueueRequest) returns (google.protobuf.Empty) {}
+    rpc PersonCompleteQueue(PersonCompleteQueueRequest) returns (PersonCompleteQueueResponse) {}
+    rpc AssignDefect(AssignDefectRequest) returns (AssignDefectResponse) {}
+}
+
+message DormybobaRole {
+    int32 role_id = 1;
+    string role_name = 2;
+}
+
+message Institute {
+    int32 institute_id = 1;
+    string institute_name = 2;
+}
+
+message AcademicType {
+    int32 type_id = 1;
+    string type_name = 2; 
+}
+
+message GenerateVerificationCodeRequest {
+    string role_name = 1;
+}
+
+message GenerateVerificationCodeResponse {
+    int32 verification_code = 1;
+}
+
+message GetRoleByVerificationCodeRequest {
+    int32 verification_code = 1;
+}
+
+message GetRoleByVerificationCodeResponse {
+    DormybobaRole role = 1;
+}
+
+message CreateUserRequest {
+    string user_id = 1;
+    int32 institute_id = 2;
+    int32 role_id = 3;
+    int32 academic_type_id = 4;
+    int32 year = 5;
+    string group = 6;
+    int32 verification_code = 7;
+}
+
+message GetAllInstitutesResponse {
+    repeated Institute institutes = 1;
+}
+
+message GetInstituteByNameRequest {
+    string institute_name = 1;
+}
+
+message GetInstituteByNameResponse {
+    Institute institute = 1;
+}
+
+message GetAllAcademicTypesResponse {
+    repeated AcademicType academic_types = 1;
+}
+
+message GetAcademicTypeByNameRequest {
+    string type_name = 1;
+}
+
+message GetAcademicTypeByNameResponse {
+    AcademicType academic_type = 1;
+}
+
+message CreateMailingRequest {
+    string theme = 1;
+    string mailing_text = 2;
+    google.protobuf.Timestamp at = 3;
+    int32 institute_id = 4;
+    int32 academic_type_id = 5;
+    int32 year = 6;
+}
+
+message CreateQueueRequest {
+    string title = 1;
+    string description = 2;
+    google.protobuf.Timestamp open = 3;
+    google.protobuf.Timestamp close = 4;
+}
+
+message AddPersonToQueueRequest {
+    int32 queue_id = 1;
+    int32 user_id = 2;
+}
+
+message AddPersonToQueueResponse {
+    bool is_active = 1;
+}
+
+message RemovePersonFromQueueRequest {
+    int32 queue_id = 1;
+    int32 user_id = 2;
+}
+
+message PersonCompleteQueueRequest {
+    int32 queue_id = 1;
+    int32 user_id = 2;
+}
+
+message PersonCompleteQueueResponse {
+    bool is_queue_empty = 1;
+    int32 active_user_id = 2;
+}
+
+message AssignDefectRequest {
+    string defect_id = 1;
+}
+
+message AssignDefectResponse {
+    int32 assigned_user_id = 1;
+}

@@ -23,6 +23,8 @@ service DormybobaCore {
     rpc GetDefectById(GetDefectByIdRequest) returns (GetDefectByIdResponse) {}
     rpc UpdateDefect(UpdateDefectRequest) returns (google.protobuf.Empty) {}
     rpc AssignDefect(AssignDefectRequest) returns (AssignDefectResponse) {}
+    rpc MailingEvent(google.protobuf.Empty) returns (stream MailingEventResponse) {}
+    rpc QueueEvent(google.protobuf.Empty) returns (stream QueueEventResponse) {}
 }
 
 message DormybobaRole {
@@ -116,7 +118,23 @@ message CreateMailingRequest {
     int32 year = 6;
 }
 
+message Mailing {
+    string theme = 1;
+    string mailing_text = 2;
+    google.protobuf.Timestamp at = 3;
+    int32 institute_id = 4;
+    int32 academic_type_id = 5;
+    int32 year = 6;
+}
+
 message CreateQueueRequest {
+    string title = 1;
+    string description = 2;
+    google.protobuf.Timestamp open = 3;
+    google.protobuf.Timestamp close = 4;
+}
+
+message Queue {
     string title = 1;
     string description = 2;
     google.protobuf.Timestamp open = 3;
@@ -189,4 +207,18 @@ message AssignDefectRequest {
 
 message AssignDefectResponse {
     int32 assigned_user_id = 1;
+}
+
+message MailingEventResponse {
+    Mailing mailing = 1;
+    repeated DormybobaUser users = 2;
+}
+
+message QueueEvent {
+    Queue queue = 1;
+    repeated DormybobaUser users = 2;
+}
+
+message QueueEventResponse {
+    repeated QueueEvent events = 1;
 }

@@ -30,6 +30,11 @@ class DormybobaCoreStub(object):
                 request_serializer=v1api__pb2.CreateUserRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
+        self.GetUserById = channel.unary_unary(
+                '/api.DormybobaCore/GetUserById',
+                request_serializer=v1api__pb2.GetUserByIdRequest.SerializeToString,
+                response_deserializer=v1api__pb2.GetUserByIdResponse.FromString,
+                )
         self.GetAllInstitutes = channel.unary_unary(
                 '/api.DormybobaCore/GetAllInstitutes',
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
@@ -108,6 +113,12 @@ class DormybobaCoreServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def CreateUser(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetUserById(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -202,6 +213,11 @@ def add_DormybobaCoreServicer_to_server(servicer, server):
                     servicer.CreateUser,
                     request_deserializer=v1api__pb2.CreateUserRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'GetUserById': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetUserById,
+                    request_deserializer=v1api__pb2.GetUserByIdRequest.FromString,
+                    response_serializer=v1api__pb2.GetUserByIdResponse.SerializeToString,
             ),
             'GetAllInstitutes': grpc.unary_unary_rpc_method_handler(
                     servicer.GetAllInstitutes,
@@ -321,6 +337,23 @@ class DormybobaCore(object):
         return grpc.experimental.unary_unary(request, target, '/api.DormybobaCore/CreateUser',
             v1api__pb2.CreateUserRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetUserById(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/api.DormybobaCore/GetUserById',
+            v1api__pb2.GetUserByIdRequest.SerializeToString,
+            v1api__pb2.GetUserByIdResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

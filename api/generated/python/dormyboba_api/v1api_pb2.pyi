@@ -92,6 +92,34 @@ class CreateUserRequest(_message.Message):
     verification_code: int
     def __init__(self, user_id: _Optional[str] = ..., institute_id: _Optional[int] = ..., role_id: _Optional[int] = ..., academic_type_id: _Optional[int] = ..., year: _Optional[int] = ..., group: _Optional[str] = ..., verification_code: _Optional[int] = ...) -> None: ...
 
+class DormybobaUser(_message.Message):
+    __slots__ = ["user_id", "institute", "role", "academic_type", "year", "group"]
+    USER_ID_FIELD_NUMBER: _ClassVar[int]
+    INSTITUTE_FIELD_NUMBER: _ClassVar[int]
+    ROLE_FIELD_NUMBER: _ClassVar[int]
+    ACADEMIC_TYPE_FIELD_NUMBER: _ClassVar[int]
+    YEAR_FIELD_NUMBER: _ClassVar[int]
+    GROUP_FIELD_NUMBER: _ClassVar[int]
+    user_id: int
+    institute: Institute
+    role: DormybobaRole
+    academic_type: AcademicType
+    year: int
+    group: str
+    def __init__(self, user_id: _Optional[int] = ..., institute: _Optional[_Union[Institute, _Mapping]] = ..., role: _Optional[_Union[DormybobaRole, _Mapping]] = ..., academic_type: _Optional[_Union[AcademicType, _Mapping]] = ..., year: _Optional[int] = ..., group: _Optional[str] = ...) -> None: ...
+
+class GetUserByIdRequest(_message.Message):
+    __slots__ = ["user_id"]
+    USER_ID_FIELD_NUMBER: _ClassVar[int]
+    user_id: int
+    def __init__(self, user_id: _Optional[int] = ...) -> None: ...
+
+class GetUserByIdResponse(_message.Message):
+    __slots__ = ["user"]
+    USER_FIELD_NUMBER: _ClassVar[int]
+    user: DormybobaUser
+    def __init__(self, user: _Optional[_Union[DormybobaUser, _Mapping]] = ...) -> None: ...
+
 class GetAllInstitutesResponse(_message.Message):
     __slots__ = ["institutes"]
     INSTITUTES_FIELD_NUMBER: _ClassVar[int]

@@ -9,6 +9,7 @@ service DormybobaCore {
     rpc GenerateVerificationCode(GenerateVerificationCodeRequest) returns (GenerateVerificationCodeResponse) {}
     rpc GetRoleByVerificationCode(GetRoleByVerificationCodeRequest) returns (GetRoleByVerificationCodeResponse) {}
     rpc CreateUser(CreateUserRequest) returns (google.protobuf.Empty) {}
+    rpc GetUserById(GetUserByIdRequest) returns (GetUserByIdResponse) {}
     rpc GetAllInstitutes(google.protobuf.Empty) returns (GetAllInstitutesResponse) {}
     rpc GetInstituteByName(GetInstituteByNameRequest) returns (GetInstituteByNameResponse) {}
     rpc GetAllAcademicTypes(google.protobuf.Empty) returns (GetAllAcademicTypesResponse) {}
@@ -62,6 +63,23 @@ message CreateUserRequest {
     int32 year = 5;
     string group = 6;
     int32 verification_code = 7;
+}
+
+message DormybobaUser {
+    int32 user_id = 1;
+    Institute institute = 2;
+    DormybobaRole role = 3;
+    AcademicType academic_type = 4;
+    int32 year = 5;
+    string group = 6;
+}
+
+message GetUserByIdRequest {
+    int32 user_id = 1;
+}
+
+message GetUserByIdResponse {
+    DormybobaUser user = 1;
 }
 
 message GetAllInstitutesResponse {

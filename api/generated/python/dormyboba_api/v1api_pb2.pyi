@@ -1,11 +1,30 @@
 from google.protobuf import empty_pb2 as _empty_pb2
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
 from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Mapping, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
+
+class DefectType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = []
+    ELECTRICITY: _ClassVar[DefectType]
+    PLUMB: _ClassVar[DefectType]
+    COMMON: _ClassVar[DefectType]
+
+class DefectStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = []
+    CREATED: _ClassVar[DefectStatus]
+    ACCEPTED: _ClassVar[DefectStatus]
+    RESOLVED: _ClassVar[DefectStatus]
+ELECTRICITY: DefectType
+PLUMB: DefectType
+COMMON: DefectType
+CREATED: DefectStatus
+ACCEPTED: DefectStatus
+RESOLVED: DefectStatus
 
 class DormybobaRole(_message.Message):
     __slots__ = ["role_id", "role_name"]
@@ -174,6 +193,32 @@ class PersonCompleteQueueResponse(_message.Message):
     is_queue_empty: bool
     active_user_id: int
     def __init__(self, is_queue_empty: bool = ..., active_user_id: _Optional[int] = ...) -> None: ...
+
+class Defect(_message.Message):
+    __slots__ = ["defect_id", "user_id", "defect_type", "description", "defect_status"]
+    DEFECT_ID_FIELD_NUMBER: _ClassVar[int]
+    USER_ID_FIELD_NUMBER: _ClassVar[int]
+    DEFECT_TYPE_FIELD_NUMBER: _ClassVar[int]
+    DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
+    DEFECT_STATUS_FIELD_NUMBER: _ClassVar[int]
+    defect_id: str
+    user_id: int
+    defect_type: DefectType
+    description: str
+    defect_status: DefectStatus
+    def __init__(self, defect_id: _Optional[str] = ..., user_id: _Optional[int] = ..., defect_type: _Optional[_Union[DefectType, str]] = ..., description: _Optional[str] = ..., defect_status: _Optional[_Union[DefectStatus, str]] = ...) -> None: ...
+
+class CreateDefectRequest(_message.Message):
+    __slots__ = ["defect"]
+    DEFECT_FIELD_NUMBER: _ClassVar[int]
+    defect: Defect
+    def __init__(self, defect: _Optional[_Union[Defect, _Mapping]] = ...) -> None: ...
+
+class UpdateDefectRequest(_message.Message):
+    __slots__ = ["defect"]
+    DEFECT_FIELD_NUMBER: _ClassVar[int]
+    defect: Defect
+    def __init__(self, defect: _Optional[_Union[Defect, _Mapping]] = ...) -> None: ...
 
 class AssignDefectRequest(_message.Message):
     __slots__ = ["defect_id"]

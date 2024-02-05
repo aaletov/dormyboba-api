@@ -18,6 +18,8 @@ service DormybobaCore {
     rpc AddPersonToQueue(AddPersonToQueueRequest) returns (AddPersonToQueueResponse) {}
     rpc RemovePersonFromQueue(RemovePersonFromQueueRequest) returns (google.protobuf.Empty) {}
     rpc PersonCompleteQueue(PersonCompleteQueueRequest) returns (PersonCompleteQueueResponse) {}
+    rpc CreateDefect(CreateDefectRequest) returns (google.protobuf.Empty) {}
+    rpc UpdateDefect(UpdateDefectRequest) returns (google.protobuf.Empty) {}
     rpc AssignDefect(AssignDefectRequest) returns (AssignDefectResponse) {}
 }
 
@@ -124,6 +126,34 @@ message PersonCompleteQueueRequest {
 message PersonCompleteQueueResponse {
     bool is_queue_empty = 1;
     int32 active_user_id = 2;
+}
+
+enum DefectType {
+    ELECTRICITY = 0;
+    PLUMB = 1;
+    COMMON = 2;
+}
+
+enum DefectStatus {
+    CREATED = 0;
+    ACCEPTED = 1;
+    RESOLVED = 2;
+}
+
+message Defect {
+    string defect_id = 1;
+    int32 user_id = 2;
+    DefectType defect_type = 3;
+    string description = 4;
+    DefectStatus defect_status = 5;
+}
+
+message CreateDefectRequest {
+    Defect defect = 1;
+}
+
+message UpdateDefectRequest {
+    Defect defect = 1;
 }
 
 message AssignDefectRequest {

@@ -300,13 +300,19 @@ class AssignDefectResponse(_message.Message):
     assigned_user_id: int
     def __init__(self, assigned_user_id: _Optional[int] = ...) -> None: ...
 
-class MailingEventResponse(_message.Message):
+class MailingEvent(_message.Message):
     __slots__ = ["mailing", "users"]
     MAILING_FIELD_NUMBER: _ClassVar[int]
     USERS_FIELD_NUMBER: _ClassVar[int]
     mailing: Mailing
     users: _containers.RepeatedCompositeFieldContainer[DormybobaUser]
     def __init__(self, mailing: _Optional[_Union[Mailing, _Mapping]] = ..., users: _Optional[_Iterable[_Union[DormybobaUser, _Mapping]]] = ...) -> None: ...
+
+class MailingEventResponse(_message.Message):
+    __slots__ = ["events"]
+    EVENTS_FIELD_NUMBER: _ClassVar[int]
+    events: _containers.RepeatedCompositeFieldContainer[MailingEvent]
+    def __init__(self, events: _Optional[_Iterable[_Union[MailingEvent, _Mapping]]] = ...) -> None: ...
 
 class QueueEvent(_message.Message):
     __slots__ = ["queue", "users"]

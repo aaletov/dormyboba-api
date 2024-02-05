@@ -209,9 +209,13 @@ message AssignDefectResponse {
     int32 assigned_user_id = 1;
 }
 
-message MailingEventResponse {
+message MailingEvent {
     Mailing mailing = 1;
     repeated DormybobaUser users = 2;
+}
+
+message MailingEventResponse {
+    repeated MailingEvent events = 1;
 }
 
 message QueueEvent {

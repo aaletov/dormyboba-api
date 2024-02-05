@@ -242,6 +242,18 @@ class CreateDefectRequest(_message.Message):
     defect: Defect
     def __init__(self, defect: _Optional[_Union[Defect, _Mapping]] = ...) -> None: ...
 
+class GetDefectByIdRequest(_message.Message):
+    __slots__ = ["defect_id"]
+    DEFECT_ID_FIELD_NUMBER: _ClassVar[int]
+    defect_id: str
+    def __init__(self, defect_id: _Optional[str] = ...) -> None: ...
+
+class GetDefectByIdResponse(_message.Message):
+    __slots__ = ["defect"]
+    DEFECT_FIELD_NUMBER: _ClassVar[int]
+    defect: Defect
+    def __init__(self, defect: _Optional[_Union[Defect, _Mapping]] = ...) -> None: ...
+
 class UpdateDefectRequest(_message.Message):
     __slots__ = ["defect"]
     DEFECT_FIELD_NUMBER: _ClassVar[int]

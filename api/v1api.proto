@@ -20,6 +20,7 @@ service DormybobaCore {
     rpc RemovePersonFromQueue(RemovePersonFromQueueRequest) returns (google.protobuf.Empty) {}
     rpc PersonCompleteQueue(PersonCompleteQueueRequest) returns (PersonCompleteQueueResponse) {}
     rpc CreateDefect(CreateDefectRequest) returns (google.protobuf.Empty) {}
+    rpc GetDefectById(GetDefectByIdRequest) returns (GetDefectByIdResponse) {}
     rpc UpdateDefect(UpdateDefectRequest) returns (google.protobuf.Empty) {}
     rpc AssignDefect(AssignDefectRequest) returns (AssignDefectResponse) {}
 }
@@ -167,6 +168,14 @@ message Defect {
 }
 
 message CreateDefectRequest {
+    Defect defect = 1;
+}
+
+message GetDefectByIdRequest {
+    string defect_id = 1;
+}
+
+message GetDefectByIdResponse {
     Defect defect = 1;
 }
 

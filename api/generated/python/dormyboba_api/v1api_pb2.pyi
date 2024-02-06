@@ -201,16 +201,18 @@ class CreateQueueRequest(_message.Message):
     def __init__(self, title: _Optional[str] = ..., description: _Optional[str] = ..., open: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., close: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class Queue(_message.Message):
-    __slots__ = ["title", "description", "open", "close"]
+    __slots__ = ["queue_id", "title", "description", "open", "close"]
+    QUEUE_ID_FIELD_NUMBER: _ClassVar[int]
     TITLE_FIELD_NUMBER: _ClassVar[int]
     DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
     OPEN_FIELD_NUMBER: _ClassVar[int]
     CLOSE_FIELD_NUMBER: _ClassVar[int]
+    queue_id: int
     title: str
     description: str
     open: _timestamp_pb2.Timestamp
     close: _timestamp_pb2.Timestamp
-    def __init__(self, title: _Optional[str] = ..., description: _Optional[str] = ..., open: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., close: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
+    def __init__(self, queue_id: _Optional[int] = ..., title: _Optional[str] = ..., description: _Optional[str] = ..., open: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., close: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class AddPersonToQueueRequest(_message.Message):
     __slots__ = ["queue_id", "user_id"]

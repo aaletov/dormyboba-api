@@ -135,10 +135,11 @@ message CreateQueueRequest {
 }
 
 message Queue {
-    string title = 1;
-    string description = 2;
-    google.protobuf.Timestamp open = 3;
-    google.protobuf.Timestamp close = 4;
+    int32 queue_id = 1;
+    string title = 2;
+    string description = 3;
+    google.protobuf.Timestamp open = 4;
+    google.protobuf.Timestamp close = 5;
 }
 
 message AddPersonToQueueRequest {

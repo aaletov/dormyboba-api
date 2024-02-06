@@ -100,6 +100,16 @@ class DormybobaCoreStub(object):
                 request_serializer=v1api__pb2.AssignDefectRequest.SerializeToString,
                 response_deserializer=v1api__pb2.AssignDefectResponse.FromString,
                 )
+        self.MailingEvent = channel.unary_stream(
+                '/api.DormybobaCore/MailingEvent',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=v1api__pb2.MailingEventResponse.FromString,
+                )
+        self.QueueEvent = channel.unary_stream(
+                '/api.DormybobaCore/QueueEvent',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=v1api__pb2.QueueEventResponse.FromString,
+                )
 
 
 class DormybobaCoreServicer(object):
@@ -207,6 +217,18 @@ class DormybobaCoreServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def MailingEvent(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def QueueEvent(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_DormybobaCoreServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -294,6 +316,16 @@ def add_DormybobaCoreServicer_to_server(servicer, server):
                     servicer.AssignDefect,
                     request_deserializer=v1api__pb2.AssignDefectRequest.FromString,
                     response_serializer=v1api__pb2.AssignDefectResponse.SerializeToString,
+            ),
+            'MailingEvent': grpc.unary_stream_rpc_method_handler(
+                    servicer.MailingEvent,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=v1api__pb2.MailingEventResponse.SerializeToString,
+            ),
+            'QueueEvent': grpc.unary_stream_rpc_method_handler(
+                    servicer.QueueEvent,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=v1api__pb2.QueueEventResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -591,5 +623,39 @@ class DormybobaCore(object):
         return grpc.experimental.unary_unary(request, target, '/api.DormybobaCore/AssignDefect',
             v1api__pb2.AssignDefectRequest.SerializeToString,
             v1api__pb2.AssignDefectResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def MailingEvent(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/api.DormybobaCore/MailingEvent',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            v1api__pb2.MailingEventResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def QueueEvent(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/api.DormybobaCore/QueueEvent',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            v1api__pb2.QueueEventResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

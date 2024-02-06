@@ -172,6 +172,22 @@ class CreateMailingRequest(_message.Message):
     year: int
     def __init__(self, theme: _Optional[str] = ..., mailing_text: _Optional[str] = ..., at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., institute_id: _Optional[int] = ..., academic_type_id: _Optional[int] = ..., year: _Optional[int] = ...) -> None: ...
 
+class Mailing(_message.Message):
+    __slots__ = ["theme", "mailing_text", "at", "institute_id", "academic_type_id", "year"]
+    THEME_FIELD_NUMBER: _ClassVar[int]
+    MAILING_TEXT_FIELD_NUMBER: _ClassVar[int]
+    AT_FIELD_NUMBER: _ClassVar[int]
+    INSTITUTE_ID_FIELD_NUMBER: _ClassVar[int]
+    ACADEMIC_TYPE_ID_FIELD_NUMBER: _ClassVar[int]
+    YEAR_FIELD_NUMBER: _ClassVar[int]
+    theme: str
+    mailing_text: str
+    at: _timestamp_pb2.Timestamp
+    institute_id: int
+    academic_type_id: int
+    year: int
+    def __init__(self, theme: _Optional[str] = ..., mailing_text: _Optional[str] = ..., at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., institute_id: _Optional[int] = ..., academic_type_id: _Optional[int] = ..., year: _Optional[int] = ...) -> None: ...
+
 class CreateQueueRequest(_message.Message):
     __slots__ = ["title", "description", "open", "close"]
     TITLE_FIELD_NUMBER: _ClassVar[int]
@@ -183,6 +199,20 @@ class CreateQueueRequest(_message.Message):
     open: _timestamp_pb2.Timestamp
     close: _timestamp_pb2.Timestamp
     def __init__(self, title: _Optional[str] = ..., description: _Optional[str] = ..., open: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., close: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
+
+class Queue(_message.Message):
+    __slots__ = ["queue_id", "title", "description", "open", "close"]
+    QUEUE_ID_FIELD_NUMBER: _ClassVar[int]
+    TITLE_FIELD_NUMBER: _ClassVar[int]
+    DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
+    OPEN_FIELD_NUMBER: _ClassVar[int]
+    CLOSE_FIELD_NUMBER: _ClassVar[int]
+    queue_id: int
+    title: str
+    description: str
+    open: _timestamp_pb2.Timestamp
+    close: _timestamp_pb2.Timestamp
+    def __init__(self, queue_id: _Optional[int] = ..., title: _Optional[str] = ..., description: _Optional[str] = ..., open: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., close: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class AddPersonToQueueRequest(_message.Message):
     __slots__ = ["queue_id", "user_id"]
@@ -271,3 +301,31 @@ class AssignDefectResponse(_message.Message):
     ASSIGNED_USER_ID_FIELD_NUMBER: _ClassVar[int]
     assigned_user_id: int
     def __init__(self, assigned_user_id: _Optional[int] = ...) -> None: ...
+
+class MailingEvent(_message.Message):
+    __slots__ = ["mailing", "users"]
+    MAILING_FIELD_NUMBER: _ClassVar[int]
+    USERS_FIELD_NUMBER: _ClassVar[int]
+    mailing: Mailing
+    users: _containers.RepeatedCompositeFieldContainer[DormybobaUser]
+    def __init__(self, mailing: _Optional[_Union[Mailing, _Mapping]] = ..., users: _Optional[_Iterable[_Union[DormybobaUser, _Mapping]]] = ...) -> None: ...
+
+class MailingEventResponse(_message.Message):
+    __slots__ = ["events"]
+    EVENTS_FIELD_NUMBER: _ClassVar[int]
+    events: _containers.RepeatedCompositeFieldContainer[MailingEvent]
+    def __init__(self, events: _Optional[_Iterable[_Union[MailingEvent, _Mapping]]] = ...) -> None: ...
+
+class QueueEvent(_message.Message):
+    __slots__ = ["queue", "users"]
+    QUEUE_FIELD_NUMBER: _ClassVar[int]
+    USERS_FIELD_NUMBER: _ClassVar[int]
+    queue: Queue
+    users: _containers.RepeatedCompositeFieldContainer[DormybobaUser]
+    def __init__(self, queue: _Optional[_Union[Queue, _Mapping]] = ..., users: _Optional[_Iterable[_Union[DormybobaUser, _Mapping]]] = ...) -> None: ...
+
+class QueueEventResponse(_message.Message):
+    __slots__ = ["events"]
+    EVENTS_FIELD_NUMBER: _ClassVar[int]
+    events: _containers.RepeatedCompositeFieldContainer[QueueEvent]
+    def __init__(self, events: _Optional[_Iterable[_Union[QueueEvent, _Mapping]]] = ...) -> None: ...

@@ -55,7 +55,7 @@ message GetRoleByVerificationCodeRequest {
 }
 
 message GetRoleByVerificationCodeResponse {
-    DormybobaRole role = 1;
+    optional DormybobaRole role = 1;
 }
 
 message CreateUserRequest {
@@ -82,7 +82,7 @@ message GetUserByIdRequest {
 }
 
 message GetUserByIdResponse {
-    DormybobaUser user = 1;
+    optional DormybobaUser user = 1;
 }
 
 message GetAllInstitutesResponse {
@@ -94,7 +94,7 @@ message GetInstituteByNameRequest {
 }
 
 message GetInstituteByNameResponse {
-    Institute institute = 1;
+    optional Institute institute = 1;
 }
 
 message GetAllAcademicTypesResponse {
@@ -106,40 +106,40 @@ message GetAcademicTypeByNameRequest {
 }
 
 message GetAcademicTypeByNameResponse {
-    AcademicType academic_type = 1;
+    optional AcademicType academic_type = 1;
 }
 
 message CreateMailingRequest {
-    string theme = 1;
+    optional string theme = 1;
     string mailing_text = 2;
-    google.protobuf.Timestamp at = 3;
-    int32 institute_id = 4;
-    int32 academic_type_id = 5;
-    int32 year = 6;
+    optional google.protobuf.Timestamp at = 3;
+    optional int32 institute_id = 4;
+    optional int32 academic_type_id = 5;
+    optional int32 year = 6;
 }
 
 message Mailing {
-    string theme = 1;
+    optional string theme = 1;
     string mailing_text = 2;
-    google.protobuf.Timestamp at = 3;
-    int32 institute_id = 4;
-    int32 academic_type_id = 5;
-    int32 year = 6;
+    optional google.protobuf.Timestamp at = 3;
+    optional int32 institute_id = 4;
+    optional int32 academic_type_id = 5;
+    optional int32 year = 6;
 }
 
 message CreateQueueRequest {
     string title = 1;
-    string description = 2;
+    optional string description = 2;
     google.protobuf.Timestamp open = 3;
-    google.protobuf.Timestamp close = 4;
+    optional google.protobuf.Timestamp close = 4;
 }
 
 message Queue {
     int32 queue_id = 1;
     string title = 2;
-    string description = 3;
+    optional string description = 3;
     google.protobuf.Timestamp open = 4;
-    google.protobuf.Timestamp close = 5;
+    optional google.protobuf.Timestamp close = 5;
 }
 
 message AddPersonToQueueRequest {
@@ -195,7 +195,7 @@ message GetDefectByIdRequest {
 }
 
 message GetDefectByIdResponse {
-    Defect defect = 1;
+    optional Defect defect = 1;
 }
 
 message UpdateDefectRequest {

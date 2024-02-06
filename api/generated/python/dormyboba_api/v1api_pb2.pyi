@@ -1,11 +1,30 @@
 from google.protobuf import empty_pb2 as _empty_pb2
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
 from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Mapping, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
+
+class DefectType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = []
+    ELECTRICITY: _ClassVar[DefectType]
+    PLUMB: _ClassVar[DefectType]
+    COMMON: _ClassVar[DefectType]
+
+class DefectStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = []
+    CREATED: _ClassVar[DefectStatus]
+    ACCEPTED: _ClassVar[DefectStatus]
+    RESOLVED: _ClassVar[DefectStatus]
+ELECTRICITY: DefectType
+PLUMB: DefectType
+COMMON: DefectType
+CREATED: DefectStatus
+ACCEPTED: DefectStatus
+RESOLVED: DefectStatus
 
 class DormybobaRole(_message.Message):
     __slots__ = ["role_id", "role_name"]
@@ -72,6 +91,34 @@ class CreateUserRequest(_message.Message):
     group: str
     verification_code: int
     def __init__(self, user_id: _Optional[str] = ..., institute_id: _Optional[int] = ..., role_id: _Optional[int] = ..., academic_type_id: _Optional[int] = ..., year: _Optional[int] = ..., group: _Optional[str] = ..., verification_code: _Optional[int] = ...) -> None: ...
+
+class DormybobaUser(_message.Message):
+    __slots__ = ["user_id", "institute", "role", "academic_type", "year", "group"]
+    USER_ID_FIELD_NUMBER: _ClassVar[int]
+    INSTITUTE_FIELD_NUMBER: _ClassVar[int]
+    ROLE_FIELD_NUMBER: _ClassVar[int]
+    ACADEMIC_TYPE_FIELD_NUMBER: _ClassVar[int]
+    YEAR_FIELD_NUMBER: _ClassVar[int]
+    GROUP_FIELD_NUMBER: _ClassVar[int]
+    user_id: int
+    institute: Institute
+    role: DormybobaRole
+    academic_type: AcademicType
+    year: int
+    group: str
+    def __init__(self, user_id: _Optional[int] = ..., institute: _Optional[_Union[Institute, _Mapping]] = ..., role: _Optional[_Union[DormybobaRole, _Mapping]] = ..., academic_type: _Optional[_Union[AcademicType, _Mapping]] = ..., year: _Optional[int] = ..., group: _Optional[str] = ...) -> None: ...
+
+class GetUserByIdRequest(_message.Message):
+    __slots__ = ["user_id"]
+    USER_ID_FIELD_NUMBER: _ClassVar[int]
+    user_id: int
+    def __init__(self, user_id: _Optional[int] = ...) -> None: ...
+
+class GetUserByIdResponse(_message.Message):
+    __slots__ = ["user"]
+    USER_FIELD_NUMBER: _ClassVar[int]
+    user: DormybobaUser
+    def __init__(self, user: _Optional[_Union[DormybobaUser, _Mapping]] = ...) -> None: ...
 
 class GetAllInstitutesResponse(_message.Message):
     __slots__ = ["institutes"]
@@ -174,6 +221,44 @@ class PersonCompleteQueueResponse(_message.Message):
     is_queue_empty: bool
     active_user_id: int
     def __init__(self, is_queue_empty: bool = ..., active_user_id: _Optional[int] = ...) -> None: ...
+
+class Defect(_message.Message):
+    __slots__ = ["defect_id", "user_id", "defect_type", "description", "defect_status"]
+    DEFECT_ID_FIELD_NUMBER: _ClassVar[int]
+    USER_ID_FIELD_NUMBER: _ClassVar[int]
+    DEFECT_TYPE_FIELD_NUMBER: _ClassVar[int]
+    DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
+    DEFECT_STATUS_FIELD_NUMBER: _ClassVar[int]
+    defect_id: str
+    user_id: int
+    defect_type: DefectType
+    description: str
+    defect_status: DefectStatus
+    def __init__(self, defect_id: _Optional[str] = ..., user_id: _Optional[int] = ..., defect_type: _Optional[_Union[DefectType, str]] = ..., description: _Optional[str] = ..., defect_status: _Optional[_Union[DefectStatus, str]] = ...) -> None: ...
+
+class CreateDefectRequest(_message.Message):
+    __slots__ = ["defect"]
+    DEFECT_FIELD_NUMBER: _ClassVar[int]
+    defect: Defect
+    def __init__(self, defect: _Optional[_Union[Defect, _Mapping]] = ...) -> None: ...
+
+class GetDefectByIdRequest(_message.Message):
+    __slots__ = ["defect_id"]
+    DEFECT_ID_FIELD_NUMBER: _ClassVar[int]
+    defect_id: str
+    def __init__(self, defect_id: _Optional[str] = ...) -> None: ...
+
+class GetDefectByIdResponse(_message.Message):
+    __slots__ = ["defect"]
+    DEFECT_FIELD_NUMBER: _ClassVar[int]
+    defect: Defect
+    def __init__(self, defect: _Optional[_Union[Defect, _Mapping]] = ...) -> None: ...
+
+class UpdateDefectRequest(_message.Message):
+    __slots__ = ["defect"]
+    DEFECT_FIELD_NUMBER: _ClassVar[int]
+    defect: Defect
+    def __init__(self, defect: _Optional[_Union[Defect, _Mapping]] = ...) -> None: ...
 
 class AssignDefectRequest(_message.Message):
     __slots__ = ["defect_id"]

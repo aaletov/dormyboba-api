@@ -9,6 +9,7 @@ service DormybobaCore {
     rpc GenerateVerificationCode(GenerateVerificationCodeRequest) returns (GenerateVerificationCodeResponse) {}
     rpc GetRoleByVerificationCode(GetRoleByVerificationCodeRequest) returns (GetRoleByVerificationCodeResponse) {}
     rpc CreateUser(CreateUserRequest) returns (google.protobuf.Empty) {}
+    rpc GetUserById(GetUserByIdRequest) returns (GetUserByIdResponse) {}
     rpc GetAllInstitutes(google.protobuf.Empty) returns (GetAllInstitutesResponse) {}
     rpc GetInstituteByName(GetInstituteByNameRequest) returns (GetInstituteByNameResponse) {}
     rpc GetAllAcademicTypes(google.protobuf.Empty) returns (GetAllAcademicTypesResponse) {}
@@ -18,6 +19,9 @@ service DormybobaCore {
     rpc AddPersonToQueue(AddPersonToQueueRequest) returns (AddPersonToQueueResponse) {}
     rpc RemovePersonFromQueue(RemovePersonFromQueueRequest) returns (google.protobuf.Empty) {}
     rpc PersonCompleteQueue(PersonCompleteQueueRequest) returns (PersonCompleteQueueResponse) {}
+    rpc CreateDefect(CreateDefectRequest) returns (google.protobuf.Empty) {}
+    rpc GetDefectById(GetDefectByIdRequest) returns (GetDefectByIdResponse) {}
+    rpc UpdateDefect(UpdateDefectRequest) returns (google.protobuf.Empty) {}
     rpc AssignDefect(AssignDefectRequest) returns (AssignDefectResponse) {}
 }
 
@@ -60,6 +64,23 @@ message CreateUserRequest {
     int32 year = 5;
     string group = 6;
     int32 verification_code = 7;
+}
+
+message DormybobaUser {
+    int32 user_id = 1;
+    Institute institute = 2;
+    DormybobaRole role = 3;
+    AcademicType academic_type = 4;
+    int32 year = 5;
+    string group = 6;
+}
+
+message GetUserByIdRequest {
+    int32 user_id = 1;
+}
+
+message GetUserByIdResponse {
+    DormybobaUser user = 1;
 }
 
 message GetAllInstitutesResponse {
@@ -124,6 +145,42 @@ message PersonCompleteQueueRequest {
 message PersonCompleteQueueResponse {
     bool is_queue_empty = 1;
     int32 active_user_id = 2;
+}
+
+enum DefectType {
+    ELECTRICITY = 0;
+    PLUMB = 1;
+    COMMON = 2;
+}
+
+enum DefectStatus {
+    CREATED = 0;
+    ACCEPTED = 1;
+    RESOLVED = 2;
+}
+
+message Defect {
+    string defect_id = 1;
+    int32 user_id = 2;
+    DefectType defect_type = 3;
+    string description = 4;
+    DefectStatus defect_status = 5;
+}
+
+message CreateDefectRequest {
+    Defect defect = 1;
+}
+
+message GetDefectByIdRequest {
+    string defect_id = 1;
+}
+
+message GetDefectByIdResponse {
+    Defect defect = 1;
+}
+
+message UpdateDefectRequest {
+    Defect defect = 1;
 }
 
 message AssignDefectRequest {

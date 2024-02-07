@@ -323,10 +323,10 @@ class MailingEvent(_message.Message):
     def __init__(self, mailing: _Optional[_Union[Mailing, _Mapping]] = ..., users: _Optional[_Iterable[_Union[DormybobaUser, _Mapping]]] = ...) -> None: ...
 
 class MailingEventResponse(_message.Message):
-    __slots__ = ["events"]
-    EVENTS_FIELD_NUMBER: _ClassVar[int]
-    events: _containers.RepeatedCompositeFieldContainer[MailingEvent]
-    def __init__(self, events: _Optional[_Iterable[_Union[MailingEvent, _Mapping]]] = ...) -> None: ...
+    __slots__ = ["event"]
+    EVENT_FIELD_NUMBER: _ClassVar[int]
+    event: MailingEvent
+    def __init__(self, event: _Optional[_Union[MailingEvent, _Mapping]] = ...) -> None: ...
 
 class QueueEvent(_message.Message):
     __slots__ = ["queue", "users"]
@@ -337,7 +337,7 @@ class QueueEvent(_message.Message):
     def __init__(self, queue: _Optional[_Union[Queue, _Mapping]] = ..., users: _Optional[_Iterable[_Union[DormybobaUser, _Mapping]]] = ...) -> None: ...
 
 class QueueEventResponse(_message.Message):
-    __slots__ = ["events"]
-    EVENTS_FIELD_NUMBER: _ClassVar[int]
-    events: _containers.RepeatedCompositeFieldContainer[QueueEvent]
-    def __init__(self, events: _Optional[_Iterable[_Union[QueueEvent, _Mapping]]] = ...) -> None: ...
+    __slots__ = ["event"]
+    EVENT_FIELD_NUMBER: _ClassVar[int]
+    event: QueueEvent
+    def __init__(self, event: _Optional[_Union[QueueEvent, _Mapping]] = ...) -> None: ...

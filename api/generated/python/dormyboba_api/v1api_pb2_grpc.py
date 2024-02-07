@@ -83,7 +83,7 @@ class DormybobaCoreStub(object):
         self.CreateDefect = channel.unary_unary(
                 '/api.DormybobaCore/CreateDefect',
                 request_serializer=v1api__pb2.CreateDefectRequest.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                response_deserializer=v1api__pb2.CreateDefectResponse.FromString,
                 )
         self.GetDefectById = channel.unary_unary(
                 '/api.DormybobaCore/GetDefectById',
@@ -300,7 +300,7 @@ def add_DormybobaCoreServicer_to_server(servicer, server):
             'CreateDefect': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateDefect,
                     request_deserializer=v1api__pb2.CreateDefectRequest.FromString,
-                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                    response_serializer=v1api__pb2.CreateDefectResponse.SerializeToString,
             ),
             'GetDefectById': grpc.unary_unary_rpc_method_handler(
                     servicer.GetDefectById,
@@ -571,7 +571,7 @@ class DormybobaCore(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/api.DormybobaCore/CreateDefect',
             v1api__pb2.CreateDefectRequest.SerializeToString,
-            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            v1api__pb2.CreateDefectResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

@@ -223,7 +223,7 @@ message MailingEvent {
 }
 
 message MailingEventResponse {
-    repeated MailingEvent events = 1;
+    MailingEvent event = 1;
 }
 
 message QueueEvent {
@@ -232,5 +232,5 @@ message QueueEvent {
 }
 
 message QueueEventResponse {
-    repeated QueueEvent events = 1;
+    QueueEvent event = 1;
 }

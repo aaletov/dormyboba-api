@@ -267,18 +267,22 @@ class Defect(_message.Message):
     def __init__(self, defect_id: _Optional[str] = ..., user_id: _Optional[int] = ..., defect_type: _Optional[_Union[DefectType, str]] = ..., description: _Optional[str] = ..., defect_status: _Optional[_Union[DefectStatus, str]] = ...) -> None: ...
 
 class CreateDefectRequest(_message.Message):
-    __slots__ = ["defect_id", "user_id", "defect_type", "description", "defect_status"]
-    DEFECT_ID_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ["user_id", "defect_type", "description", "defect_status"]
     USER_ID_FIELD_NUMBER: _ClassVar[int]
     DEFECT_TYPE_FIELD_NUMBER: _ClassVar[int]
     DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
     DEFECT_STATUS_FIELD_NUMBER: _ClassVar[int]
-    defect_id: str
     user_id: int
     defect_type: DefectType
     description: str
     defect_status: DefectStatus
-    def __init__(self, defect_id: _Optional[str] = ..., user_id: _Optional[int] = ..., defect_type: _Optional[_Union[DefectType, str]] = ..., description: _Optional[str] = ..., defect_status: _Optional[_Union[DefectStatus, str]] = ...) -> None: ...
+    def __init__(self, user_id: _Optional[int] = ..., defect_type: _Optional[_Union[DefectType, str]] = ..., description: _Optional[str] = ..., defect_status: _Optional[_Union[DefectStatus, str]] = ...) -> None: ...
+
+class CreateDefectResponse(_message.Message):
+    __slots__ = ["defect"]
+    DEFECT_FIELD_NUMBER: _ClassVar[int]
+    defect: Defect
+    def __init__(self, defect: _Optional[_Union[Defect, _Mapping]] = ...) -> None: ...
 
 class GetDefectByIdRequest(_message.Message):
     __slots__ = ["defect_id"]

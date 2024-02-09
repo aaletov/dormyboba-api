@@ -28,7 +28,7 @@ class DormybobaCoreStub(object):
         self.CreateUser = channel.unary_unary(
                 '/api.DormybobaCore/CreateUser',
                 request_serializer=v1api__pb2.CreateUserRequest.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                response_deserializer=v1api__pb2.CreateUserResponse.FromString,
                 )
         self.GetUserById = channel.unary_unary(
                 '/api.DormybobaCore/GetUserById',
@@ -58,12 +58,12 @@ class DormybobaCoreStub(object):
         self.CreateMailing = channel.unary_unary(
                 '/api.DormybobaCore/CreateMailing',
                 request_serializer=v1api__pb2.CreateMailingRequest.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                response_deserializer=v1api__pb2.CreateMailingResponse.FromString,
                 )
         self.CreateQueue = channel.unary_unary(
                 '/api.DormybobaCore/CreateQueue',
                 request_serializer=v1api__pb2.CreateQueueRequest.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                response_deserializer=v1api__pb2.CreateQueueResponse.FromString,
                 )
         self.AddPersonToQueue = channel.unary_unary(
                 '/api.DormybobaCore/AddPersonToQueue',
@@ -245,7 +245,7 @@ def add_DormybobaCoreServicer_to_server(servicer, server):
             'CreateUser': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateUser,
                     request_deserializer=v1api__pb2.CreateUserRequest.FromString,
-                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                    response_serializer=v1api__pb2.CreateUserResponse.SerializeToString,
             ),
             'GetUserById': grpc.unary_unary_rpc_method_handler(
                     servicer.GetUserById,
@@ -275,12 +275,12 @@ def add_DormybobaCoreServicer_to_server(servicer, server):
             'CreateMailing': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateMailing,
                     request_deserializer=v1api__pb2.CreateMailingRequest.FromString,
-                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                    response_serializer=v1api__pb2.CreateMailingResponse.SerializeToString,
             ),
             'CreateQueue': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateQueue,
                     request_deserializer=v1api__pb2.CreateQueueRequest.FromString,
-                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                    response_serializer=v1api__pb2.CreateQueueResponse.SerializeToString,
             ),
             'AddPersonToQueue': grpc.unary_unary_rpc_method_handler(
                     servicer.AddPersonToQueue,
@@ -384,7 +384,7 @@ class DormybobaCore(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/api.DormybobaCore/CreateUser',
             v1api__pb2.CreateUserRequest.SerializeToString,
-            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            v1api__pb2.CreateUserResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -486,7 +486,7 @@ class DormybobaCore(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/api.DormybobaCore/CreateMailing',
             v1api__pb2.CreateMailingRequest.SerializeToString,
-            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            v1api__pb2.CreateMailingResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -503,7 +503,7 @@ class DormybobaCore(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/api.DormybobaCore/CreateQueue',
             v1api__pb2.CreateQueueRequest.SerializeToString,
-            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            v1api__pb2.CreateQueueResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

@@ -119,12 +119,13 @@ message CreateMailingRequest {
 }
 
 message Mailing {
-    optional string theme = 1;
-    string mailing_text = 2;
-    optional google.protobuf.Timestamp at = 3;
-    optional int32 institute_id = 4;
-    optional int32 academic_type_id = 5;
-    optional int32 year = 6;
+    int32 mailing_id = 1;
+    optional string theme = 2;
+    string mailing_text = 3;
+    optional google.protobuf.Timestamp at = 4;
+    optional int32 institute_id = 5;
+    optional int32 academic_type_id = 6;
+    optional int32 year = 7;
 }
 
 message CreateQueueRequest {

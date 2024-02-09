@@ -173,20 +173,22 @@ class CreateMailingRequest(_message.Message):
     def __init__(self, theme: _Optional[str] = ..., mailing_text: _Optional[str] = ..., at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., institute_id: _Optional[int] = ..., academic_type_id: _Optional[int] = ..., year: _Optional[int] = ...) -> None: ...
 
 class Mailing(_message.Message):
-    __slots__ = ["theme", "mailing_text", "at", "institute_id", "academic_type_id", "year"]
+    __slots__ = ["mailing_id", "theme", "mailing_text", "at", "institute_id", "academic_type_id", "year"]
+    MAILING_ID_FIELD_NUMBER: _ClassVar[int]
     THEME_FIELD_NUMBER: _ClassVar[int]
     MAILING_TEXT_FIELD_NUMBER: _ClassVar[int]
     AT_FIELD_NUMBER: _ClassVar[int]
     INSTITUTE_ID_FIELD_NUMBER: _ClassVar[int]
     ACADEMIC_TYPE_ID_FIELD_NUMBER: _ClassVar[int]
     YEAR_FIELD_NUMBER: _ClassVar[int]
+    mailing_id: int
     theme: str
     mailing_text: str
     at: _timestamp_pb2.Timestamp
     institute_id: int
     academic_type_id: int
     year: int
-    def __init__(self, theme: _Optional[str] = ..., mailing_text: _Optional[str] = ..., at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., institute_id: _Optional[int] = ..., academic_type_id: _Optional[int] = ..., year: _Optional[int] = ...) -> None: ...
+    def __init__(self, mailing_id: _Optional[int] = ..., theme: _Optional[str] = ..., mailing_text: _Optional[str] = ..., at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., institute_id: _Optional[int] = ..., academic_type_id: _Optional[int] = ..., year: _Optional[int] = ...) -> None: ...
 
 class CreateQueueRequest(_message.Message):
     __slots__ = ["title", "description", "open", "close"]

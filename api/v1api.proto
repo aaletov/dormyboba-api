@@ -8,14 +8,14 @@ import "google/protobuf/timestamp.proto";
 service DormybobaCore {
     rpc GenerateVerificationCode(GenerateVerificationCodeRequest) returns (GenerateVerificationCodeResponse) {}
     rpc GetRoleByVerificationCode(GetRoleByVerificationCodeRequest) returns (GetRoleByVerificationCodeResponse) {}
-    rpc CreateUser(CreateUserRequest) returns (google.protobuf.Empty) {}
+    rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
     rpc GetUserById(GetUserByIdRequest) returns (GetUserByIdResponse) {}
     rpc GetAllInstitutes(google.protobuf.Empty) returns (GetAllInstitutesResponse) {}
     rpc GetInstituteByName(GetInstituteByNameRequest) returns (GetInstituteByNameResponse) {}
     rpc GetAllAcademicTypes(google.protobuf.Empty) returns (GetAllAcademicTypesResponse) {}
     rpc GetAcademicTypeByName(GetAcademicTypeByNameRequest) returns (GetAcademicTypeByNameResponse) {}
-    rpc CreateMailing(CreateMailingRequest) returns (google.protobuf.Empty) {}
-    rpc CreateQueue(CreateQueueRequest) returns (google.protobuf.Empty) {}
+    rpc CreateMailing(CreateMailingRequest) returns (CreateMailingResponse) {}
+    rpc CreateQueue(CreateQueueRequest) returns (CreateQueueResponse) {}
     rpc AddPersonToQueue(AddPersonToQueueRequest) returns (AddPersonToQueueResponse) {}
     rpc RemovePersonFromQueue(RemovePersonFromQueueRequest) returns (google.protobuf.Empty) {}
     rpc PersonCompleteQueue(PersonCompleteQueueRequest) returns (PersonCompleteQueueResponse) {}
@@ -58,23 +58,22 @@ message GetRoleByVerificationCodeResponse {
     optional DormybobaRole role = 1;
 }
 
-message CreateUserRequest {
-    string user_id = 1;
-    int32 institute_id = 2;
-    int32 role_id = 3;
-    int32 academic_type_id = 4;
-    int32 year = 5;
-    string group = 6;
-    int32 verification_code = 7;
-}
-
 message DormybobaUser {
-    int32 user_id = 1;
+    optional int32 user_id = 1;
     Institute institute = 2;
     DormybobaRole role = 3;
     AcademicType academic_type = 4;
     int32 year = 5;
     string group = 6;
+}
+
+message CreateUserRequest {
+    DormybobaUser user = 1;
+    int32 verification_code = 2;
+}
+
+message CreateUserResponse {
+    DormybobaUser user = 1;
 }
 
 message GetUserByIdRequest {
@@ -109,17 +108,8 @@ message GetAcademicTypeByNameResponse {
     optional AcademicType academic_type = 1;
 }
 
-message CreateMailingRequest {
-    optional string theme = 1;
-    string mailing_text = 2;
-    optional google.protobuf.Timestamp at = 3;
-    optional int32 institute_id = 4;
-    optional int32 academic_type_id = 5;
-    optional int32 year = 6;
-}
-
 message Mailing {
-    int32 mailing_id = 1;
+    optional int32 mailing_id = 1;
     optional string theme = 2;
     string mailing_text = 3;
     optional google.protobuf.Timestamp at = 4;
@@ -128,19 +118,28 @@ message Mailing {
     optional int32 year = 7;
 }
 
-message CreateQueueRequest {
-    string title = 1;
-    optional string description = 2;
-    google.protobuf.Timestamp open = 3;
-    optional google.protobuf.Timestamp close = 4;
+message CreateMailingRequest {
+    Mailing mailing = 1;
+}
+
+message CreateMailingResponse {
+    Mailing mailing = 1;
 }
 
 message Queue {
-    int32 queue_id = 1;
+    optional int32 queue_id = 1;
     string title = 2;
     optional string description = 3;
     google.protobuf.Timestamp open = 4;
     optional google.protobuf.Timestamp close = 5;
+}
+
+message CreateQueueRequest {
+    Queue queue = 1;
+}
+
+message CreateQueueResponse {
+    Queue queue = 1;
 }
 
 message AddPersonToQueueRequest {
@@ -180,18 +179,15 @@ enum DefectStatus {
 }
 
 message Defect {
-    string defect_id = 1;
+    optional string defect_id = 1;
     int32 user_id = 2;
     DefectType defect_type = 3;
     string description = 4;
-    DefectStatus defect_status = 5;
+    optional DefectStatus defect_status = 5;
 }
 
 message CreateDefectRequest {
-    int32 user_id = 2;
-    DefectType defect_type = 3;
-    string description = 4;
-    DefectStatus defect_status = 5;
+    Defect defect = 1;
 }
 
 message CreateDefectResponse {

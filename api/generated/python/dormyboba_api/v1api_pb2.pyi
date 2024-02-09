@@ -74,24 +74,6 @@ class GetRoleByVerificationCodeResponse(_message.Message):
     role: DormybobaRole
     def __init__(self, role: _Optional[_Union[DormybobaRole, _Mapping]] = ...) -> None: ...
 
-class CreateUserRequest(_message.Message):
-    __slots__ = ["user_id", "institute_id", "role_id", "academic_type_id", "year", "group", "verification_code"]
-    USER_ID_FIELD_NUMBER: _ClassVar[int]
-    INSTITUTE_ID_FIELD_NUMBER: _ClassVar[int]
-    ROLE_ID_FIELD_NUMBER: _ClassVar[int]
-    ACADEMIC_TYPE_ID_FIELD_NUMBER: _ClassVar[int]
-    YEAR_FIELD_NUMBER: _ClassVar[int]
-    GROUP_FIELD_NUMBER: _ClassVar[int]
-    VERIFICATION_CODE_FIELD_NUMBER: _ClassVar[int]
-    user_id: str
-    institute_id: int
-    role_id: int
-    academic_type_id: int
-    year: int
-    group: str
-    verification_code: int
-    def __init__(self, user_id: _Optional[str] = ..., institute_id: _Optional[int] = ..., role_id: _Optional[int] = ..., academic_type_id: _Optional[int] = ..., year: _Optional[int] = ..., group: _Optional[str] = ..., verification_code: _Optional[int] = ...) -> None: ...
-
 class DormybobaUser(_message.Message):
     __slots__ = ["user_id", "institute", "role", "academic_type", "year", "group"]
     USER_ID_FIELD_NUMBER: _ClassVar[int]
@@ -107,6 +89,20 @@ class DormybobaUser(_message.Message):
     year: int
     group: str
     def __init__(self, user_id: _Optional[int] = ..., institute: _Optional[_Union[Institute, _Mapping]] = ..., role: _Optional[_Union[DormybobaRole, _Mapping]] = ..., academic_type: _Optional[_Union[AcademicType, _Mapping]] = ..., year: _Optional[int] = ..., group: _Optional[str] = ...) -> None: ...
+
+class CreateUserRequest(_message.Message):
+    __slots__ = ["user", "verification_code"]
+    USER_FIELD_NUMBER: _ClassVar[int]
+    VERIFICATION_CODE_FIELD_NUMBER: _ClassVar[int]
+    user: DormybobaUser
+    verification_code: int
+    def __init__(self, user: _Optional[_Union[DormybobaUser, _Mapping]] = ..., verification_code: _Optional[int] = ...) -> None: ...
+
+class CreateUserResponse(_message.Message):
+    __slots__ = ["user"]
+    USER_FIELD_NUMBER: _ClassVar[int]
+    user: DormybobaUser
+    def __init__(self, user: _Optional[_Union[DormybobaUser, _Mapping]] = ...) -> None: ...
 
 class GetUserByIdRequest(_message.Message):
     __slots__ = ["user_id"]
@@ -156,22 +152,6 @@ class GetAcademicTypeByNameResponse(_message.Message):
     academic_type: AcademicType
     def __init__(self, academic_type: _Optional[_Union[AcademicType, _Mapping]] = ...) -> None: ...
 
-class CreateMailingRequest(_message.Message):
-    __slots__ = ["theme", "mailing_text", "at", "institute_id", "academic_type_id", "year"]
-    THEME_FIELD_NUMBER: _ClassVar[int]
-    MAILING_TEXT_FIELD_NUMBER: _ClassVar[int]
-    AT_FIELD_NUMBER: _ClassVar[int]
-    INSTITUTE_ID_FIELD_NUMBER: _ClassVar[int]
-    ACADEMIC_TYPE_ID_FIELD_NUMBER: _ClassVar[int]
-    YEAR_FIELD_NUMBER: _ClassVar[int]
-    theme: str
-    mailing_text: str
-    at: _timestamp_pb2.Timestamp
-    institute_id: int
-    academic_type_id: int
-    year: int
-    def __init__(self, theme: _Optional[str] = ..., mailing_text: _Optional[str] = ..., at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., institute_id: _Optional[int] = ..., academic_type_id: _Optional[int] = ..., year: _Optional[int] = ...) -> None: ...
-
 class Mailing(_message.Message):
     __slots__ = ["mailing_id", "theme", "mailing_text", "at", "institute_id", "academic_type_id", "year"]
     MAILING_ID_FIELD_NUMBER: _ClassVar[int]
@@ -190,17 +170,17 @@ class Mailing(_message.Message):
     year: int
     def __init__(self, mailing_id: _Optional[int] = ..., theme: _Optional[str] = ..., mailing_text: _Optional[str] = ..., at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., institute_id: _Optional[int] = ..., academic_type_id: _Optional[int] = ..., year: _Optional[int] = ...) -> None: ...
 
-class CreateQueueRequest(_message.Message):
-    __slots__ = ["title", "description", "open", "close"]
-    TITLE_FIELD_NUMBER: _ClassVar[int]
-    DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
-    OPEN_FIELD_NUMBER: _ClassVar[int]
-    CLOSE_FIELD_NUMBER: _ClassVar[int]
-    title: str
-    description: str
-    open: _timestamp_pb2.Timestamp
-    close: _timestamp_pb2.Timestamp
-    def __init__(self, title: _Optional[str] = ..., description: _Optional[str] = ..., open: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., close: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
+class CreateMailingRequest(_message.Message):
+    __slots__ = ["mailing"]
+    MAILING_FIELD_NUMBER: _ClassVar[int]
+    mailing: Mailing
+    def __init__(self, mailing: _Optional[_Union[Mailing, _Mapping]] = ...) -> None: ...
+
+class CreateMailingResponse(_message.Message):
+    __slots__ = ["mailing"]
+    MAILING_FIELD_NUMBER: _ClassVar[int]
+    mailing: Mailing
+    def __init__(self, mailing: _Optional[_Union[Mailing, _Mapping]] = ...) -> None: ...
 
 class Queue(_message.Message):
     __slots__ = ["queue_id", "title", "description", "open", "close"]
@@ -215,6 +195,18 @@ class Queue(_message.Message):
     open: _timestamp_pb2.Timestamp
     close: _timestamp_pb2.Timestamp
     def __init__(self, queue_id: _Optional[int] = ..., title: _Optional[str] = ..., description: _Optional[str] = ..., open: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., close: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
+
+class CreateQueueRequest(_message.Message):
+    __slots__ = ["queue"]
+    QUEUE_FIELD_NUMBER: _ClassVar[int]
+    queue: Queue
+    def __init__(self, queue: _Optional[_Union[Queue, _Mapping]] = ...) -> None: ...
+
+class CreateQueueResponse(_message.Message):
+    __slots__ = ["queue"]
+    QUEUE_FIELD_NUMBER: _ClassVar[int]
+    queue: Queue
+    def __init__(self, queue: _Optional[_Union[Queue, _Mapping]] = ...) -> None: ...
 
 class AddPersonToQueueRequest(_message.Message):
     __slots__ = ["queue_id", "user_id"]
@@ -269,16 +261,10 @@ class Defect(_message.Message):
     def __init__(self, defect_id: _Optional[str] = ..., user_id: _Optional[int] = ..., defect_type: _Optional[_Union[DefectType, str]] = ..., description: _Optional[str] = ..., defect_status: _Optional[_Union[DefectStatus, str]] = ...) -> None: ...
 
 class CreateDefectRequest(_message.Message):
-    __slots__ = ["user_id", "defect_type", "description", "defect_status"]
-    USER_ID_FIELD_NUMBER: _ClassVar[int]
-    DEFECT_TYPE_FIELD_NUMBER: _ClassVar[int]
-    DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
-    DEFECT_STATUS_FIELD_NUMBER: _ClassVar[int]
-    user_id: int
-    defect_type: DefectType
-    description: str
-    defect_status: DefectStatus
-    def __init__(self, user_id: _Optional[int] = ..., defect_type: _Optional[_Union[DefectType, str]] = ..., description: _Optional[str] = ..., defect_status: _Optional[_Union[DefectStatus, str]] = ...) -> None: ...
+    __slots__ = ["defect"]
+    DEFECT_FIELD_NUMBER: _ClassVar[int]
+    defect: Defect
+    def __init__(self, defect: _Optional[_Union[Defect, _Mapping]] = ...) -> None: ...
 
 class CreateDefectResponse(_message.Message):
     __slots__ = ["defect"]

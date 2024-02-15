@@ -39,7 +39,7 @@ message Institute {
 
 message AcademicType {
     int32 type_id = 1;
-    string type_name = 2; 
+    string type_name = 2;
 }
 
 message GenerateVerificationCodeRequest {
@@ -116,6 +116,7 @@ message Mailing {
     optional int32 institute_id = 5;
     optional int32 academic_type_id = 6;
     optional int32 year = 7;
+    optional string group = 8;
 }
 
 message CreateMailingRequest {

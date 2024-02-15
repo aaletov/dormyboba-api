@@ -153,7 +153,7 @@ class GetAcademicTypeByNameResponse(_message.Message):
     def __init__(self, academic_type: _Optional[_Union[AcademicType, _Mapping]] = ...) -> None: ...
 
 class Mailing(_message.Message):
-    __slots__ = ["mailing_id", "theme", "mailing_text", "at", "institute_id", "academic_type_id", "year"]
+    __slots__ = ["mailing_id", "theme", "mailing_text", "at", "institute_id", "academic_type_id", "year", "group"]
     MAILING_ID_FIELD_NUMBER: _ClassVar[int]
     THEME_FIELD_NUMBER: _ClassVar[int]
     MAILING_TEXT_FIELD_NUMBER: _ClassVar[int]
@@ -161,6 +161,7 @@ class Mailing(_message.Message):
     INSTITUTE_ID_FIELD_NUMBER: _ClassVar[int]
     ACADEMIC_TYPE_ID_FIELD_NUMBER: _ClassVar[int]
     YEAR_FIELD_NUMBER: _ClassVar[int]
+    GROUP_FIELD_NUMBER: _ClassVar[int]
     mailing_id: int
     theme: str
     mailing_text: str
@@ -168,7 +169,8 @@ class Mailing(_message.Message):
     institute_id: int
     academic_type_id: int
     year: int
-    def __init__(self, mailing_id: _Optional[int] = ..., theme: _Optional[str] = ..., mailing_text: _Optional[str] = ..., at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., institute_id: _Optional[int] = ..., academic_type_id: _Optional[int] = ..., year: _Optional[int] = ...) -> None: ...
+    group: str
+    def __init__(self, mailing_id: _Optional[int] = ..., theme: _Optional[str] = ..., mailing_text: _Optional[str] = ..., at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., institute_id: _Optional[int] = ..., academic_type_id: _Optional[int] = ..., year: _Optional[int] = ..., group: _Optional[str] = ...) -> None: ...
 
 class CreateMailingRequest(_message.Message):
     __slots__ = ["mailing"]

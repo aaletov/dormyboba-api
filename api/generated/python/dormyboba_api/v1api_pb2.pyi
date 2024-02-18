@@ -50,30 +50,6 @@ class AcademicType(_message.Message):
     type_name: str
     def __init__(self, type_id: _Optional[int] = ..., type_name: _Optional[str] = ...) -> None: ...
 
-class GenerateVerificationCodeRequest(_message.Message):
-    __slots__ = ["role_name"]
-    ROLE_NAME_FIELD_NUMBER: _ClassVar[int]
-    role_name: str
-    def __init__(self, role_name: _Optional[str] = ...) -> None: ...
-
-class GenerateVerificationCodeResponse(_message.Message):
-    __slots__ = ["verification_code"]
-    VERIFICATION_CODE_FIELD_NUMBER: _ClassVar[int]
-    verification_code: int
-    def __init__(self, verification_code: _Optional[int] = ...) -> None: ...
-
-class GetRoleByVerificationCodeRequest(_message.Message):
-    __slots__ = ["verification_code"]
-    VERIFICATION_CODE_FIELD_NUMBER: _ClassVar[int]
-    verification_code: int
-    def __init__(self, verification_code: _Optional[int] = ...) -> None: ...
-
-class GetRoleByVerificationCodeResponse(_message.Message):
-    __slots__ = ["role"]
-    ROLE_FIELD_NUMBER: _ClassVar[int]
-    role: DormybobaRole
-    def __init__(self, role: _Optional[_Union[DormybobaRole, _Mapping]] = ...) -> None: ...
-
 class DormybobaUser(_message.Message):
     __slots__ = ["user_id", "institute", "role", "academic_type", "year", "group"]
     USER_ID_FIELD_NUMBER: _ClassVar[int]
@@ -90,15 +66,25 @@ class DormybobaUser(_message.Message):
     group: str
     def __init__(self, user_id: _Optional[int] = ..., institute: _Optional[_Union[Institute, _Mapping]] = ..., role: _Optional[_Union[DormybobaRole, _Mapping]] = ..., academic_type: _Optional[_Union[AcademicType, _Mapping]] = ..., year: _Optional[int] = ..., group: _Optional[str] = ...) -> None: ...
 
-class CreateUserRequest(_message.Message):
-    __slots__ = ["user", "verification_code"]
-    USER_FIELD_NUMBER: _ClassVar[int]
-    VERIFICATION_CODE_FIELD_NUMBER: _ClassVar[int]
-    user: DormybobaUser
-    verification_code: int
-    def __init__(self, user: _Optional[_Union[DormybobaUser, _Mapping]] = ..., verification_code: _Optional[int] = ...) -> None: ...
+class GenerateTokenRequest(_message.Message):
+    __slots__ = ["role_name"]
+    ROLE_NAME_FIELD_NUMBER: _ClassVar[int]
+    role_name: str
+    def __init__(self, role_name: _Optional[str] = ...) -> None: ...
 
-class CreateUserResponse(_message.Message):
+class GenerateTokenResponse(_message.Message):
+    __slots__ = ["token"]
+    TOKEN_FIELD_NUMBER: _ClassVar[int]
+    token: str
+    def __init__(self, token: _Optional[str] = ...) -> None: ...
+
+class UpdateUserRequest(_message.Message):
+    __slots__ = ["user"]
+    USER_FIELD_NUMBER: _ClassVar[int]
+    user: DormybobaUser
+    def __init__(self, user: _Optional[_Union[DormybobaUser, _Mapping]] = ...) -> None: ...
+
+class UpdateUserResponse(_message.Message):
     __slots__ = ["user"]
     USER_FIELD_NUMBER: _ClassVar[int]
     user: DormybobaUser

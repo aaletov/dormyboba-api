@@ -15,20 +15,15 @@ class DormybobaCoreStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.GenerateVerificationCode = channel.unary_unary(
-                '/api.DormybobaCore/GenerateVerificationCode',
-                request_serializer=v1api__pb2.GenerateVerificationCodeRequest.SerializeToString,
-                response_deserializer=v1api__pb2.GenerateVerificationCodeResponse.FromString,
+        self.GenerateToken = channel.unary_unary(
+                '/api.DormybobaCore/GenerateToken',
+                request_serializer=v1api__pb2.GenerateTokenRequest.SerializeToString,
+                response_deserializer=v1api__pb2.GenerateTokenResponse.FromString,
                 )
-        self.GetRoleByVerificationCode = channel.unary_unary(
-                '/api.DormybobaCore/GetRoleByVerificationCode',
-                request_serializer=v1api__pb2.GetRoleByVerificationCodeRequest.SerializeToString,
-                response_deserializer=v1api__pb2.GetRoleByVerificationCodeResponse.FromString,
-                )
-        self.CreateUser = channel.unary_unary(
-                '/api.DormybobaCore/CreateUser',
-                request_serializer=v1api__pb2.CreateUserRequest.SerializeToString,
-                response_deserializer=v1api__pb2.CreateUserResponse.FromString,
+        self.UpdateUser = channel.unary_unary(
+                '/api.DormybobaCore/UpdateUser',
+                request_serializer=v1api__pb2.UpdateUserRequest.SerializeToString,
+                response_deserializer=v1api__pb2.UpdateUserResponse.FromString,
                 )
         self.GetUserById = channel.unary_unary(
                 '/api.DormybobaCore/GetUserById',
@@ -115,19 +110,13 @@ class DormybobaCoreStub(object):
 class DormybobaCoreServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def GenerateVerificationCode(self, request, context):
+    def GenerateToken(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetRoleByVerificationCode(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def CreateUser(self, request, context):
+    def UpdateUser(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -232,20 +221,15 @@ class DormybobaCoreServicer(object):
 
 def add_DormybobaCoreServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'GenerateVerificationCode': grpc.unary_unary_rpc_method_handler(
-                    servicer.GenerateVerificationCode,
-                    request_deserializer=v1api__pb2.GenerateVerificationCodeRequest.FromString,
-                    response_serializer=v1api__pb2.GenerateVerificationCodeResponse.SerializeToString,
+            'GenerateToken': grpc.unary_unary_rpc_method_handler(
+                    servicer.GenerateToken,
+                    request_deserializer=v1api__pb2.GenerateTokenRequest.FromString,
+                    response_serializer=v1api__pb2.GenerateTokenResponse.SerializeToString,
             ),
-            'GetRoleByVerificationCode': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetRoleByVerificationCode,
-                    request_deserializer=v1api__pb2.GetRoleByVerificationCodeRequest.FromString,
-                    response_serializer=v1api__pb2.GetRoleByVerificationCodeResponse.SerializeToString,
-            ),
-            'CreateUser': grpc.unary_unary_rpc_method_handler(
-                    servicer.CreateUser,
-                    request_deserializer=v1api__pb2.CreateUserRequest.FromString,
-                    response_serializer=v1api__pb2.CreateUserResponse.SerializeToString,
+            'UpdateUser': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdateUser,
+                    request_deserializer=v1api__pb2.UpdateUserRequest.FromString,
+                    response_serializer=v1api__pb2.UpdateUserResponse.SerializeToString,
             ),
             'GetUserById': grpc.unary_unary_rpc_method_handler(
                     servicer.GetUserById,
@@ -338,7 +322,7 @@ class DormybobaCore(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def GenerateVerificationCode(request,
+    def GenerateToken(request,
             target,
             options=(),
             channel_credentials=None,
@@ -348,14 +332,14 @@ class DormybobaCore(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/api.DormybobaCore/GenerateVerificationCode',
-            v1api__pb2.GenerateVerificationCodeRequest.SerializeToString,
-            v1api__pb2.GenerateVerificationCodeResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/api.DormybobaCore/GenerateToken',
+            v1api__pb2.GenerateTokenRequest.SerializeToString,
+            v1api__pb2.GenerateTokenResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetRoleByVerificationCode(request,
+    def UpdateUser(request,
             target,
             options=(),
             channel_credentials=None,
@@ -365,26 +349,9 @@ class DormybobaCore(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/api.DormybobaCore/GetRoleByVerificationCode',
-            v1api__pb2.GetRoleByVerificationCodeRequest.SerializeToString,
-            v1api__pb2.GetRoleByVerificationCodeResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def CreateUser(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/api.DormybobaCore/CreateUser',
-            v1api__pb2.CreateUserRequest.SerializeToString,
-            v1api__pb2.CreateUserResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/api.DormybobaCore/UpdateUser',
+            v1api__pb2.UpdateUserRequest.SerializeToString,
+            v1api__pb2.UpdateUserResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

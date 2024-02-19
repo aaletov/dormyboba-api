@@ -6,9 +6,8 @@ import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
 service DormybobaCore {
-    rpc GenerateVerificationCode(GenerateVerificationCodeRequest) returns (GenerateVerificationCodeResponse) {}
-    rpc GetRoleByVerificationCode(GetRoleByVerificationCodeRequest) returns (GetRoleByVerificationCodeResponse) {}
-    rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
+    rpc GenerateToken(GenerateTokenRequest) returns (GenerateTokenResponse) {}
+    rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
     rpc GetUserById(GetUserByIdRequest) returns (GetUserByIdResponse) {}
     rpc GetAllInstitutes(google.protobuf.Empty) returns (GetAllInstitutesResponse) {}
     rpc GetInstituteByName(GetInstituteByNameRequest) returns (GetInstituteByNameResponse) {}
@@ -42,37 +41,29 @@ message AcademicType {
     string type_name = 2;
 }
 
-message GenerateVerificationCodeRequest {
+message DormybobaUser {
+    optional int32 user_id = 1;
+    optional Institute institute = 2;
+    DormybobaRole role = 3;
+    optional AcademicType academic_type = 4;
+    optional int32 year = 5;
+    optional string group = 6;
+    bool is_registered = 7;
+}
+
+message GenerateTokenRequest {
     string role_name = 1;
 }
 
-message GenerateVerificationCodeResponse {
-    int32 verification_code = 1;
+message GenerateTokenResponse {
+    string token = 1;
 }
 
-message GetRoleByVerificationCodeRequest {
-    int32 verification_code = 1;
-}
-
-message GetRoleByVerificationCodeResponse {
-    optional DormybobaRole role = 1;
-}
-
-message DormybobaUser {
-    optional int32 user_id = 1;
-    Institute institute = 2;
-    DormybobaRole role = 3;
-    AcademicType academic_type = 4;
-    int32 year = 5;
-    string group = 6;
-}
-
-message CreateUserRequest {
+message UpdateUserRequest {
     DormybobaUser user = 1;
-    int32 verification_code = 2;
 }
 
-message CreateUserResponse {
+message UpdateUserResponse {
     DormybobaUser user = 1;
 }
 

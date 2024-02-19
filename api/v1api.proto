@@ -43,11 +43,11 @@ message AcademicType {
 
 message DormybobaUser {
     optional int32 user_id = 1;
-    Institute institute = 2;
+    optional Institute institute = 2;
     DormybobaRole role = 3;
-    AcademicType academic_type = 4;
-    int32 year = 5;
-    string group = 6;
+    optional AcademicType academic_type = 4;
+    optional int32 year = 5;
+    optional string group = 6;
     bool is_registered = 7;
 }
 

@@ -48,6 +48,7 @@ message DormybobaUser {
     AcademicType academic_type = 4;
     int32 year = 5;
     string group = 6;
+    bool is_registered = 7;
 }
 
 message GenerateTokenRequest {

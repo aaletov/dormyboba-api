@@ -51,20 +51,22 @@ class AcademicType(_message.Message):
     def __init__(self, type_id: _Optional[int] = ..., type_name: _Optional[str] = ...) -> None: ...
 
 class DormybobaUser(_message.Message):
-    __slots__ = ["user_id", "institute", "role", "academic_type", "year", "group"]
+    __slots__ = ["user_id", "institute", "role", "academic_type", "year", "group", "is_registered"]
     USER_ID_FIELD_NUMBER: _ClassVar[int]
     INSTITUTE_FIELD_NUMBER: _ClassVar[int]
     ROLE_FIELD_NUMBER: _ClassVar[int]
     ACADEMIC_TYPE_FIELD_NUMBER: _ClassVar[int]
     YEAR_FIELD_NUMBER: _ClassVar[int]
     GROUP_FIELD_NUMBER: _ClassVar[int]
+    IS_REGISTERED_FIELD_NUMBER: _ClassVar[int]
     user_id: int
     institute: Institute
     role: DormybobaRole
     academic_type: AcademicType
     year: int
     group: str
-    def __init__(self, user_id: _Optional[int] = ..., institute: _Optional[_Union[Institute, _Mapping]] = ..., role: _Optional[_Union[DormybobaRole, _Mapping]] = ..., academic_type: _Optional[_Union[AcademicType, _Mapping]] = ..., year: _Optional[int] = ..., group: _Optional[str] = ...) -> None: ...
+    is_registered: bool
+    def __init__(self, user_id: _Optional[int] = ..., institute: _Optional[_Union[Institute, _Mapping]] = ..., role: _Optional[_Union[DormybobaRole, _Mapping]] = ..., academic_type: _Optional[_Union[AcademicType, _Mapping]] = ..., year: _Optional[int] = ..., group: _Optional[str] = ..., is_registered: bool = ...) -> None: ...
 
 class GenerateTokenRequest(_message.Message):
     __slots__ = ["role_name"]
